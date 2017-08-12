@@ -1,0 +1,26 @@
+{
+  "name": "meeting-makers",
+  "version": "0.1.0",
+  "description": "Website for finding meetings",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MattReidArnold/meeting-makers.git"
+  },
+  "author": "Matt Arnold",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MattReidArnold/meeting-makers/issues"
+  },
+  "homepage": "https://github.com/MattReidArnold/meeting-makers#readme",
+  "dependencies": {
+    "good": "^7.2.0",
+    "good-console": "^6.4.0",
+    "good-squeeze": "^5.0.2",
+    "hapi": "^16.5.2",
+    "inert": "^4.2.1"
+  }
+}
