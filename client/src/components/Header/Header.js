@@ -29,10 +29,15 @@ const Header = props => {
     <header>
       <nav>
         <div className="nav-wrapper blue">
-          <Link className="left brand-logo" to="/">
+          <Link className="brand-logo" to="/">
             Meeting Makers
           </Link>
-          <ul className="right">{content}</ul>
+          <ul className="right">
+            <li>
+              <Link to="/meetings">Meetings</Link>
+            </li>
+            {content}
+          </ul>
         </div>
       </nav>
     </header>
