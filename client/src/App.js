@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import Header from './components/Header/Header';
 import Landing from './containers/Landing/Landing';
-import Meetings from './containers/Meetings/Meetings';
+import MeetingList from './containers/MeetingList/MeetingList';
 
 class App extends Component {
   state = {
@@ -25,7 +25,7 @@ class App extends Component {
             <Header user={this.state.user} />
             <Switch>
               <Route exact path="/" component={Landing} />
-              <Route exact path="/meetings" component={Meetings} />
+              <Route exact path="/meetings" component={MeetingList} />
             </Switch>
           </div>
         </BrowserRouter>
