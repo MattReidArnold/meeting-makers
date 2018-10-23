@@ -3,16 +3,22 @@ import axios from 'axios';
 
 import MeetingListItem from './MeetingListItem/MeetingListItem';
 
+const PAGE_SIZE = 20;
+
 class Meetings extends Component {
   state = {
-    meetings: []
+    meetings: [],
+    page: 1
   };
 
   componentDidMount() {
-    axios.get('/api/meetings').then(res => {
+    this.fetchMeetings(this.state.page).then(res => {
       this.setState({ meetings: res.data });
     });
   }
+
+  fetchMeetings = page =>
+    axios.get(`/api/meetings?page_number=${page}&page_size=${PAGE_SIZE}`);
 
   renderHeader() {
     return (
@@ -30,6 +36,29 @@ class Meetings extends Component {
     );
   }
 
+  loadNextPage = () => {
+    const page = this.state.page + 1;
+    this.fetchMeetings(page).then(res => {
+      this.setState(prevState => {
+        return { meetings: prevState.meetings.concat(res.data), page };
+      });
+    });
+  };
+
+  renderLoadMoreButton() {
+    return (
+      <div className="collection-item">
+        <div className="row">
+          <div className="col">
+            <button className="btn" onClick={this.loadNextPage}>
+              Load more meetings
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const meetings = this.state.meetings.map(m => {
       return <MeetingListItem key={m._id} {...m} />;
@@ -38,6 +67,7 @@ class Meetings extends Component {
       <div className="collection">
         {this.renderHeader()}
         {meetings}
+        {this.renderLoadMoreButton()}
       </div>
     );
   }

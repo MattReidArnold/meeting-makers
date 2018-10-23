@@ -1,13 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const mongoose = require('mongoose');
-const Meeting = mongoose.model('meetings');
+const meetingsController = require('../controllers/meetingsController');
 
-router.get('/', (req, res) => {
-  Meeting.find().then(meetings => {
-    res.json(meetings);
-  });
-});
+router.get('/', meetingsController.findAll);
 
 module.exports = router;

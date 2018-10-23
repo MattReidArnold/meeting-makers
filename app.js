@@ -7,6 +7,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 
 const keys = require('./config/keys');
+const withPaging = require('./middlewares/withPaging');
 
 mongoose.connect(keys.mongoDbURI);
 require('./models');
@@ -31,6 +32,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(withPaging());
 
 app.use('/auth', authRouter);
 app.use('/api/meetings/', meetingsRouter);
