@@ -22,17 +22,15 @@ class Meetings extends Component {
 
   renderHeader() {
     return (
-      <div className="collection-item">
-        <div className="row">
-          <div className="col s1">DAY</div>
-          <div className="col s1">TIME</div>
-          <div className="col s3">GROUP NAME</div>
-          <div className="col s3">ADDRESS</div>
-          <div className="col s2">CITY</div>
-          <div className="col s1">DISTRICT</div>
-          <div className="col s1">CODES</div>
-        </div>
-      </div>
+      <tr>
+        <th>DAY</th>
+        <th>TIME</th>
+        <th>GROUP NAME</th>
+        <th>ADDRESS</th>
+        <th>CITY</th>
+        <th>DISTRICT</th>
+        <th>CODES</th>
+      </tr>
     );
   }
 
@@ -64,9 +62,11 @@ class Meetings extends Component {
       return <MeetingListItem key={m._id} {...m} />;
     });
     return (
-      <div className="collection">
-        {this.renderHeader()}
-        {meetings}
+      <div>
+        <table>
+          <thead>{this.renderHeader()}</thead>
+          <tbody>{meetings}</tbody>
+        </table>
         {this.renderLoadMoreButton()}
       </div>
     );
