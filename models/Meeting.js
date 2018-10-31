@@ -3,7 +3,9 @@ const { Schema } = mongoose;
 
 const meetingSchema = new Schema({
   day: String,
+  dayOffset: Number,
   time: String,
+  timeMinutesOffset: Number,
   groupName: String,
   address: String,
   city: String,
