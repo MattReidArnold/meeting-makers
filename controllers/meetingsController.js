@@ -6,7 +6,7 @@ module.exports = {
     const { skip, limit } = req.paging;
     const sort = { dayOffset: 1, timeMinutesOffset: 1 };
     Meeting.find(null, null, { skip, limit, sort }).then(meetings => {
-      res.json(meetings);
+      res.pagedJson(meetings);
     });
   }
 };

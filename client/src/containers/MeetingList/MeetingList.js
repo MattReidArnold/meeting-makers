@@ -13,7 +13,8 @@ class Meetings extends Component {
 
   componentDidMount() {
     this.fetchMeetings(this.state.page).then(res => {
-      this.setState({ meetings: res.data });
+      console.log(console.log(res.data));
+      this.setState({ meetings: res.data.data });
     });
   }
 
@@ -38,7 +39,7 @@ class Meetings extends Component {
     const page = this.state.page + 1;
     this.fetchMeetings(page).then(res => {
       this.setState(prevState => {
-        return { meetings: prevState.meetings.concat(res.data), page };
+        return { meetings: prevState.meetings.concat(res.data.data), page };
       });
     });
   };
