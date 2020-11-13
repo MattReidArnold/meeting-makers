@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const Header = props => {
   let content = (
@@ -29,14 +30,25 @@ const Header = props => {
     <header>
       <nav>
         <div className="nav-wrapper blue">
-          <Link className="left brand-logo" to="/">
+          <Link className="brand-logo" to="/">
             Meeting Makers
           </Link>
-          <ul className="right">{content}</ul>
+          <ul className="right">
+            <li>
+              <Link to="/meetings">Meetings</Link>
+            </li>
+            {content}
+          </ul>
         </div>
       </nav>
     </header>
   );
 };
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    user: state.auth
+  };
+};
+
+export default connect(mapStateToProps)(Header);

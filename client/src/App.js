@@ -1,19 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
+import actions from './store/actions';
 import Header from './components/Header/Header';
 import Landing from './containers/Landing/Landing';
+import MeetingList from './containers/MeetingList/MeetingList';
 
 class App extends Component {
-  state = {
-    user: null
-  };
-
   componentDidMount() {
-    axios.get('/auth/current_user').then(({ data }) => {
-      this.setState({ user: data });
-    });
+    this.props.fetchUser();
   }
 
   render() {
@@ -21,9 +17,10 @@ class App extends Component {
       <div className="container">
         <BrowserRouter>
           <div>
-            <Header user={this.state.user} />
+            <Header />
             <Switch>
               <Route exact path="/" component={Landing} />
+              <Route exact path="/meetings" component={MeetingList} />
             </Switch>
           </div>
         </BrowserRouter>
@@ -32,4 +29,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  actions
+)(App);

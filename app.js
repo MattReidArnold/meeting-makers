@@ -1,21 +1,23 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 
 const keys = require('./config/keys');
+const withPaging = require('./middlewares/withPaging');
 
 mongoose.connect(keys.mongoDbURI);
 require('./models');
 
 require('./initializers/passport');
 
-var authRouter = require('./routes/auth');
+const authRouter = require('./routes/auth');
+const meetingsRouter = require('./routes/meetings');
 
-var app = express();
+const app = express();
 
 app.use(
   cookieSession({
@@ -30,8 +32,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(withPaging());
 
 app.use('/auth', authRouter);
+app.use('/api/meetings/', meetingsRouter);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
